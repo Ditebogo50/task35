@@ -2,7 +2,7 @@ const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const jwtSecretKey = process.env.JWT_SECRET_KEY;
 
-const creatJWT = ({ username, role, oUs, divisions }) =>
+const createJWT = ({ username, role, oUs, divisions }) =>
   jwt.sign({ username, role, oUs, divisions }, jwtSecretKey);
 
 exports.register = async (req, res) => {
@@ -10,7 +10,7 @@ exports.register = async (req, res) => {
   const user = new User({ username, password });
   try {
     const newUser = await user.save();
-    const token = creatJWT(newUser);
+    const token = createJWT(newUser);
     res.status(201).json({ message: "Registration successful", token });
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -33,7 +33,7 @@ exports.login = async (req, res) => {
     }
 
     // Generate JWT
-    const token = creatJWT(user);
+    const token = createJWT(user);
 
     res.status(200).json({ message: "Login successful", token });
   } catch (err) {
