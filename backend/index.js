@@ -6,7 +6,9 @@ const cors = require("cors"); // Enable Cross-Origin Resource Sharing (CORS)
 const helmet = require("helmet"); // Set various HTTP headers for security
 require('dotenv').config(); // Load environment variables from .env file
 
+const authenticateToken = require('./middleware/authenticateToken').authenticateToken;
 const userController = require('./controllers/user_controller');
+const credentialsController = require('./controllers/credentials_controller');
 
 const app = express(); // Create an instance of the Express application
 
@@ -20,6 +22,10 @@ mongoose.connect(mongo_config.connectionString, mongo_config.config);
 
 app.post('/api/users/login', userController.login);
 app.post('/api/users/register', userController.register);
+
+app.get('/api/divisions/:divisionId/credentials', authenticateToken, credentialsController.getCredentials);
+app.post('/api/division/:divisionId/credentials', authenticateToken, credentialsController.createCredential);
+app.put('/api/credentials/:credentialId', authenticateToken, credentialsController.updateCredential);
 
 // Start the server and listen for requests on port 3001
 app.listen(3001, () => {
