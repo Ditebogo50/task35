@@ -1,9 +1,5 @@
 import withAuth from "../hoc/withAuth";
-import {
-  useParams,
-  useLoaderData,
-  useRevalidator,
-} from "react-router-dom";
+import { useParams, useLoaderData, useRevalidator } from "react-router-dom";
 import fetchOus, { assignOU, designOU } from "../../api_client/fetchOus";
 import { designDivision, assignDivision } from "../../api_client/fetchDivision";
 import { changeRole } from "../../api_client/fetchUsers";
@@ -70,31 +66,39 @@ const User = () => {
 
   const RoleAction = ({ user }) => {
     return (
-      <select
-        defaultValue={user.role}
-        onChange={(e) => handleRoleChange(e, user._id)}
-      >
-        <option value="normal">Normal</option>
-        <option value="management">Management</option>
-        <option value="admin">Admin</option>
-      </select>
+      <div>
+        <label>Change User Role</label>
+        <select
+          defaultValue={user.role}
+          onChange={(e) => handleRoleChange(e, user._id)}
+        >
+          <option value="normal">Normal</option>
+          <option value="management">Management</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
     );
   };
 
   return (
     <>
-      <h2>{userId}</h2>
+      <h2>{user.username} - {user.role}</h2>
       <RoleAction user={user} />
-      <ul>
+      <h4>Assign/Design OUs and Divisions</h4>
+      <ul className="admin-list">
         {ous.map((ou) => (
           <li key={ou._id}>
-            {ou.name}
-            <OUActions user={user} ou={ou} />
+            <span className="content">{ou.name}</span>
+            <span className="actions">
+              <OUActions user={user} ou={ou} />
+            </span>
             <ul>
               {ou.divisions.map((division) => (
                 <li key={division._id}>
-                  {division.name}
-                  <DivisionActions user={user} division={division} />
+                  <span className="content">{division.name}</span>
+                  <span className="actions">
+                    <DivisionActions user={user} division={division} />
+                  </span>
                 </li>
               ))}
             </ul>

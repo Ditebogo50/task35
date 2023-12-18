@@ -6,24 +6,25 @@ const Credentials = ({ user }) => {
 
   return (
     <>
-      <h3>{division.name}</h3>
-      <h4>Credentials</h4>
-      <ul>
+      <h3>{division.name} Credentials</h3>
+      <ul className="admin-list">
         {division?.credentials?.map((credential, index) => {
           return (
             <li key={`credential.username-${index}`}>
-              <span>
+              <span className="content">
                 {credential.username}:{credential.password}
               </span>
 
-              {["management", "admin"].includes(user?.role) && (
-                <Link
-                  to={`/division/${divisionId}/editCredential`}
-                  state={{ credential }}
-                >
-                  Edit
-                </Link>
-              )}
+              <span className="actions">
+                {["management", "admin"].includes(user?.role) && (
+                  <Link
+                    to={`/division/${divisionId}/editCredential`}
+                    state={{ credential }}
+                  >
+                    Edit
+                  </Link>
+                )}
+              </span>
             </li>
           );
         })}

@@ -11,8 +11,7 @@ const NewCredentialForm = ({ division }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const endpoint =
-      `http://localhost:3001/api/division/${division}/credentials`;
+    const endpoint = `http://localhost:3001/api/division/${division}/credentials`;
 
     const token = localStorage.getItem("token");
 
@@ -45,26 +44,28 @@ const NewCredentialForm = ({ division }) => {
   };
 
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <h3>Create new Credential</h3>
-      <form onSubmit={handleSubmit}>
-        <label>Username:</label>
+      <div className="form-field">
+        <label>Username</label>
         <input
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <br />
-        <label>Password:</label>
+      </div>
+      <div className="form-field">
+        <label>Password</label>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <br />
+      </div>
+      <div className="form-field">
         <button type="submit">Create Credential</button>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };
 

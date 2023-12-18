@@ -14,7 +14,9 @@ const Root = () => {
           </li>
         </ul>
       )}
-      <Outlet />
+      <div className="bodyContainer">
+        <Outlet />
+      </div>
     </>
   );
 };

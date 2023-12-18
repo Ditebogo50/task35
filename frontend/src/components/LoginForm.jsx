@@ -18,7 +18,7 @@ const LoginForm = () => {
       });
       const data = await response.json();
       if (response.ok) {
-        // Login successful, save JWT token to localStorage or session storage
+        // Login successful, save JWT token to localStorage
         localStorage.setItem("token", data.token);
         // Redirect to dashboard
         return navigate("/dashboard", { state: { fromLogin: true } });
@@ -33,24 +33,28 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
+    <form onSubmit={handleLogin}>
       <h2>Login</h2>
-      <form onSubmit={handleLogin}>
+      <div className="form-field">
         <input
           type="text"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
+      </div>
+      <div className="form-field">
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+      </div>
+      <div className="form-field">
         <button type="submit">Login</button>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };
 

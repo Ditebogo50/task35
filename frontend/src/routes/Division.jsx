@@ -14,9 +14,11 @@ const Division = ({ user }) => {
   return (
     <>
       <Credentials user={user} />
-      <Link to={`/division/${divisionId}/newCredential`}>
-        Add New Credential
-      </Link>
+      <div className="new-credential">
+        <Link to={`/division/${divisionId}/newCredential`}>
+          Add New Credential
+        </Link>
+      </div>
     </>
   );
 };
