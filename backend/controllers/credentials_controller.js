@@ -1,4 +1,3 @@
-const jwt = require("jsonwebtoken");
 const Division = require("../models/division");
 const Credential = require("../models/credential");
 

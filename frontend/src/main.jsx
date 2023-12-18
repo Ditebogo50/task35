@@ -6,21 +6,23 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "./index.css";
-import Root from "./routes/Root"
+import Root from "./routes/Root";
 import Login from "./routes/Login";
 import Register from "./routes/Register";
-import Dashboard from "./routes/Dashboard";
+import Dashboard, { loader as usersLoader } from "./routes/Dashboard";
 import Division, { loader as divisionLoader } from "./routes/Division";
-import NewCredential from "./routes/NewCredential"
+import NewCredential from "./routes/NewCredential";
 import EditCredential from "./routes/EditCredential";
+import User, { loader as ousLoader  } from "./routes/User";
 
 const router = createBrowserRouter([
   {
-    path: "/",  
+    path: "/",
     element: <Root />,
     children: [
       {
         path: "/dashboard",
+        loader: usersLoader,
         element: <Dashboard />,
       },
       {
@@ -30,11 +32,16 @@ const router = createBrowserRouter([
       },
       {
         path: "/division/:divisionId/newCredential",
-        element: <NewCredential />
+        element: <NewCredential />,
       },
       {
         path: "/division/:divisionId/editCredential",
-        element: <EditCredential />
+        element: <EditCredential />,
+      },
+      {
+        path: "/user/:userId",
+        loader: ousLoader,
+        element: <User />,
       },
       {
         path: "/login",
